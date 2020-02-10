@@ -45,3 +45,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'faker', '~> 2.10'
 
 gem 'pry', '~> 0.12.2'
+
+gem "rack-cors", "~> 1.1"
