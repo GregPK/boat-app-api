@@ -6,7 +6,7 @@ class CreateBoats < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :description
       t.string :color
-      t.number :size
+      t.integer :size
 
       t.timestamps
     end
