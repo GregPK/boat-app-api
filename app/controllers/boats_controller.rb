@@ -14,6 +14,11 @@ class BoatsController < ApplicationController
     render json: Boat.find(params[:id])
   end
 
+  def destroy
+    Boat.find(params[:id]).destroy!
+    render :ok
+  end
+
   def boat_params
     params.permit(:name, :size, :color, :description)
   end
