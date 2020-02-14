@@ -4,24 +4,34 @@ class BoatsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    render json: Boat.all
+    render json: user_boats
   end
-  
+
   def show
-    render json: Boat.find(params[:id])
+    render json: authenticated_boat
   end
 
   def update
-    Boat.find(params[:id]).update!(boat_params)
-    render json: Boat.find(params[:id])
+    authenticated_boat.update!(boat_params)
+    render json: authenticated_boat
   end
 
   def destroy
-    Boat.find(params[:id]).destroy!
+    authenticated_boat.destroy!
     render :ok
+  end
+
+  private
+
+  def user_boats
+    Boat.where(user: current_user)
   end
 
   def boat_params
     params.permit(:name, :size, :color, :description)
+  end
+
+  def authenticated_boat
+    @boat ||= user_boats.find(params[:id])
   end
 end
