@@ -24,7 +24,7 @@ Bundler.require(*Rails.groups)
 module BoatAppApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.0 and config.autoloader = :classic
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -36,6 +36,7 @@ module BoatAppApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.action_controller.forgery_protection_origin_check = false
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'

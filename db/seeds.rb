@@ -14,7 +14,7 @@ _empty = User.create(id: 3, name: 'Boatless', email: 'boatless@example.org', pas
 
 Boat.destroy_all
 6.times do |i|
-  name = Faker::Artist.name + ' ' + Faker::Dessert.variety
+  name = Faker::Books::CultureSeries.culture_ship
   desc = Faker::GreekPhilosophers.quote
   color = 'rgb(' + [Random.rand(256), Random.rand(256), Random.rand(256)].join(',') + ')'
   user = i.even? ? admin : other
