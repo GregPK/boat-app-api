@@ -12,13 +12,27 @@ class BoatsController < ApplicationController
   end
 
   def update
-    authenticated_boat.update!(boat_params)
-    render json: authenticated_boat
+    authenticated_boat.update(boat_params)
+    if authenticated_boat.valid?
+      render json: authenticated_boat, status: :created
+    else
+      render json: {errors: authenticated_boat.errors}, status: :unprocessable_entity
+    end
   end
 
   def destroy
     authenticated_boat.destroy!
-    render :ok
+    render json: :ok, status: :ok
+  end
+
+  def create
+    boat = Boat.create(boat_params.merge(user: current_user))
+
+    if boat.valid?
+      render json: boat, status: :created
+    else
+      render json: {errors: boat.errors}, status: :unprocessable_entity
+    end
   end
 
   private
